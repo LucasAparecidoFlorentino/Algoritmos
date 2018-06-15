@@ -2,10 +2,10 @@
 # # a) Apresente os números do vetor em ordem inversa.
 tamanho = int(input("Qual o tamanho do vetor necessário: "))
 lista = [""]*tamanho
-# p = 0
-# while p < len(lista):
-#     lista[p] = int(input("Digite os valores: "))
-#     p = p + 1
+p = 0
+while p < len(lista):
+    lista[p] = int(input("Digite os valores: "))
+    p = p + 1
 # print(lista [:: -1])
 
 # b) Apresente a soma de todos os elementos.
@@ -29,5 +29,8 @@ lista = [""]*tamanho
 # d) Determinar um segmento informado pelo usuário (posição inicial e final) para apresentar os números na tela.
 # Por exemplo: na sequência 5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1 o usuário teria que informar 4 e 8
 # (posição inicial e final, respectivamente) para mostrar na tela somente os valores destacados.
- p = 0
- 
+posicao_inicial = int(input("Digite a posição inicial: "))
+posicao_final = int(input("Digite a posição final: "))
+while posicao_inicial <= posicao_final:
+    print("Os valores destacados são {}" .format(lista[posicao_inicial]))
+    posicao_inicial = posicao_inicial + 1
