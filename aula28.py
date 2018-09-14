@@ -58,7 +58,7 @@ def listar_usuarios(conexao):
     cursor = conexao.cursor()
 
     # Monta o SQL
-    sql = "SELECT * FROM usuario;"
+    sql = "SELECT rowid, * FROM usuario;"
 
     # Executa o SQL
     cursor.execute(sql)
@@ -66,16 +66,33 @@ def listar_usuarios(conexao):
     # Armazena os dados do select
     usuarios = cursor.fetchall()
 
-    print(usuarios)
+    #Percorrer a lista com os registros
+    #Estou chamando de "u" cada item dessa lista
+    for usr in usuarios:
+        print( "{}: {}".format(usr[0], usr[1]))
+
+def buscar_usuario(conexao):
+
+    cursor = conexao.cursor()
+
+    sql = "SELECT * FROM usuario WHERE nome LIKE '%Florentino%';"
+
+    cursor.execute(sql)
+
+    usuarios = cursor.fetchall()
+
+    for usr in usuarios:
+        print(usr[1])
+
 
 
 ############## P R I N C I P A L ###################
 
 conexao = sqlite3.connect("aula28.sqlite")
 
-listar_usuarios(conexao)
+# listar_usuarios(conexao)
 # inserir_usuario(conexao)
-
+buscar_usuario(conexao)
 
 
 
