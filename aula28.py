@@ -88,13 +88,31 @@ def buscar_usuario(conexao):
 
 ############## P R I N C I P A L ###################
 
+opcao = 0
+
 conexao = sqlite3.connect("aula28.sqlite")
 
 # listar_usuarios(conexao)
 # inserir_usuario(conexao)
-buscar_usuario(conexao)
+# buscar_usuario(conexao)
 
+while opcao != 3:
+    print("""
+    1- Inserir usuário
+    2- Listar usuários
+    3- Buscar usuários
+    """)
 
+    opcao = int(input("Qual a opção desejada ? "))
+
+    if opcao == 1:
+        inserir_usuario(conexao)
+
+    if opcao == 2:
+        print(listar_usuarios(conexao))
+
+    if opcao == 3:
+        print(buscar_usuario(conexao))
 
 
 
