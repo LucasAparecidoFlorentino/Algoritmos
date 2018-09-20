@@ -20,7 +20,7 @@ def criar_tabela_usuario(conexao):
     cursor.execute(sql)
 
 
-def inserir_usuario(conexao):
+def inserir_usuario(conexao, nome, login, senha):
 
     # Cria o cursor para operar o banco
     cursor = conexao.cursor()
@@ -28,13 +28,8 @@ def inserir_usuario(conexao):
 
     ########## Inserindo um registro ###############33
 
-    nome = input("Digite seu nome: ")
 
-    usuario = input("Digite seu nome de usuário: ")
-
-    senha = input("Digite sua senha: ")
-
-    sql = "INSERT INTO usuario VALUES ('{}', '{}', '{}');".format(nome, usuario, senha)
+    sql = "INSERT INTO usuario VALUES ('{}', '{}', '{}');".format(nome, login, senha)
 
     # sql = """
     #     INSERT INTO usuario VALUES(
@@ -71,11 +66,11 @@ def listar_usuarios(conexao):
     for usr in usuarios:
         print( "{}: {}".format(usr[0], usr[1]))
 
-def buscar_usuario(conexao):
+def buscar_usuario(conexao, busca):
 
     cursor = conexao.cursor()
 
-    sql = "SELECT * FROM usuario WHERE nome LIKE '%Florentino%';"
+    sql = "SELECT * FROM usuario WHERE nome LIKE '%{}%';".format(busca)
 
     cursor.execute(sql)
 
@@ -84,6 +79,15 @@ def buscar_usuario(conexao):
     for usr in usuarios:
         print(usr[1])
 
+def excluir_usuario(conexao,id):
+
+    cursor = conexao.cursor()
+
+    sql = "DELETE FROM usuario WHERE rowid = {};".format(id)
+
+    cursor.execute(sql)
+
+    conexao.commit()
 
 
 ############## P R I N C I P A L ###################
@@ -92,27 +96,39 @@ opcao = 0
 
 conexao = sqlite3.connect("aula28.sqlite")
 
-# listar_usuarios(conexao)
-# inserir_usuario(conexao)
-# buscar_usuario(conexao)
-
-while opcao != 3:
+while opcao != 4:
     print("""
-    1- Inserir usuário
-    2- Listar usuários
-    3- Buscar usuários
+    Em relação aos usuários do sistema, você deseja ...
+    1- Inserir
+    2- Listar
+    3- Buscar
+    4- Excluir
     """)
 
     opcao = int(input("Qual a opção desejada ? "))
 
     if opcao == 1:
-        inserir_usuario(conexao)
+        n = input("Nome: ")
+        l = input("Login: ")
+        s = input("Senha: ")
+
+        inserir_usuario(conexao, n, l, s)
 
     if opcao == 2:
-        print(listar_usuarios(conexao))
+        listar_usuarios(conexao)
 
     if opcao == 3:
-        print(buscar_usuario(conexao))
+        print("--- Buscar registro ---")
+        busca = input("Qual o nome do usuário a ser buscado ? ")
+        buscar_usuario(conexao, busca)
+
+    if opcao == 4:
+        print(excluir_usuario(conexao))
+
+    else:
+        print("Opção inválida ! ")
+    print("=-=" * 10)
+print("Fim do programa !")
 
 
 
