@@ -123,7 +123,8 @@ while opcao != 4:
         buscar_usuario(conexao, busca)
 
     if opcao == 4:
-        print(excluir_usuario(conexao))
+        id = int(input("Qual id você quer excluir ? "))
+        excluir_usuario(conexao, id)
 
     else:
         print("Opção inválida ! ")
