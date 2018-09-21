@@ -96,13 +96,14 @@ opcao = 0
 
 conexao = sqlite3.connect("aula28.sqlite")
 
-while opcao != 4:
+while opcao != 5:
     print("""
     Em relação aos usuários do sistema, você deseja ...
     1- Inserir
     2- Listar
     3- Buscar
     4- Excluir
+    5- Sair do programa
     """)
 
     opcao = int(input("Qual a opção desejada ? "))
@@ -114,17 +115,20 @@ while opcao != 4:
 
         inserir_usuario(conexao, n, l, s)
 
-    if opcao == 2:
+    elif opcao == 2:
         listar_usuarios(conexao)
 
-    if opcao == 3:
+    elif opcao == 3:
         print("--- Buscar registro ---")
         busca = input("Qual o nome do usuário a ser buscado ? ")
         buscar_usuario(conexao, busca)
 
-    if opcao == 4:
+    elif opcao == 4:
         id = int(input("Qual id você quer excluir ? "))
         excluir_usuario(conexao, id)
+
+    elif opcao == 5:
+        print("Saindo do programa")
 
     else:
         print("Opção inválida ! ")
