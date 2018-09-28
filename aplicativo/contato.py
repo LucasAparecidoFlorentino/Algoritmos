@@ -134,3 +134,8 @@ def menu_contato():
 conexao = sqlite3.connect("aula28.sqlite")
 
 menu_contato()
+
+
+print("Fim do programa")
+
+conexao.close()
