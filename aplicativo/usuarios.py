@@ -89,10 +89,24 @@ def excluir_usuario(conexao,id):
 
     conexao.commit()
 
+def alterar_usuario(conexao, id):
+
+    cursor = conexao.cursor()
+
+    n = input("Nome: ")
+    l = input("Login: ")
+    s = input("Senha: ")
+
+    sql = "UPDATE usuario SET nome = '{}', login = '{}', senha = '{}' WHERE rowid = {}; ".format(n, l, s, id)
+
+    cursor.execute(sql)
+
+    conexao.commit()
+
 def menu_usuario():
     opcao = 0
 
-    while opcao != 5:
+    while opcao != 6:
         print("""
         Em relação aos usuários do sistema, você deseja ...
         1- Inserir
@@ -124,6 +138,9 @@ def menu_usuario():
             excluir_usuario(conexao, id)
 
         elif opcao == 5:
+
+
+        elif opcao == 6:
             print("Saindo do programa")
 
         else:

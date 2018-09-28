@@ -66,11 +66,16 @@ def excluir_contato(conexao,id):
 
     conexao.commit()
 
-def alterar_contato(conexao, nome, telefone_residencial, celular, email, usuario):
+def alterar_contato(conexao, id):
 
     cursor = conexao.cursor()
 
-    sql = "UPDATE nome, telefone_residencial, celular, email, usuario, FROM contato WHERE rowid = {}; ".format(id)
+    n = input("Nome: ")
+    tr = input("Telefone Residencial: ")
+    c = input("Celular: ")
+    ema = input("Email: ")
+
+    sql = "UPDATE contato SET nome = '{}', telefone_residencial = '{}', celular = '{}', email = '{}' WHERE rowid = {}; ".format(n, tr, c, ema, id)
 
     cursor.execute(sql)
 
@@ -97,7 +102,7 @@ def menu_contato():
             tr = input("Telefone Residencial: ")
             c = input("Celular: ")
             ema = input("Email: ")
-            usuario = input("Usuário: ")
+            usuario = int(input("Usuário: "))
             inserir_contato(conexao, n, tr, c, ema, usuario)
 
         elif opcao == 2:
