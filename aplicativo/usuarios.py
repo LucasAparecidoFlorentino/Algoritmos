@@ -113,7 +113,8 @@ def menu_usuario():
         2- Listar
         3- Buscar
         4- Excluir
-        5- Sair do programa
+        5- Alterar
+        6- Sair do programa
         """)
 
         opcao = int(input("Qual a opção desejada ? "))
@@ -138,7 +139,9 @@ def menu_usuario():
             excluir_usuario(conexao, id)
 
         elif opcao == 5:
-
+            listar_usuarios(conexao)
+            id = int(input("Qual contato você quer alterar ? "))
+            alterar_usuario(conexao, id)
 
         elif opcao == 6:
             print("Saindo do programa")
