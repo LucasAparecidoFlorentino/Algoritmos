@@ -1,4 +1,5 @@
 import sqlite3
+from contato import *
 
 ########### FUNÇÕES ################
 
@@ -103,7 +104,29 @@ def alterar_usuario(conexao, id):
 
     conexao.commit()
 
+def login(conexao, login, senha):
+
+    cursor = conexao.cursor()
+
+    sql = "SELECT rowid, * FROM usuario WHERE login LIKE '{}' AND senha LIKE '{}';".format(login, senha)
+
+    cursor.execute(sql)
+
+    usuario = cursor.fetchall()
+
+    if usuario:
+        for usr in usuario:
+            print( "\n\033[47m\033[34m--- Bem Vindo! --- {} ---\033[0;0m\n".format(usr[1]))
+            return menu_contato()
+
+    else:
+        print("\n\033[47m\033[30m--- Usuário inválido! ---\033[0;0m\n")
+        print("\033[47m\033[30m--- Retornando para o Menu Agenda ---\033[0;0m\n")
+        return
+
 def menu_usuario():
+    conexao = sqlite3.connect("aula28.sqlite")
+
     opcao = 0
 
     while opcao != 6:
@@ -145,23 +168,11 @@ def menu_usuario():
 
         elif opcao == 6:
             print("Saindo do programa")
+            break
 
         else:
             print("Opção inválida ! ")
             print("=-=" * 10)
 
-############## P R I N C I P A L ###################
-
-conexao = sqlite3.connect("aula28.sqlite")
-
-menu_usuario()
-
-print("Fim do programa !")
-
-
-
-
-
-
-# Fechando conexão (ligação) com o banco
-conexao.close()
+    # Fechando conexão (ligação) com o banco
+    conexao.close()

@@ -82,6 +82,8 @@ def alterar_contato(conexao, id):
     conexao.commit()
 
 def menu_contato():
+    conexao = sqlite3.connect("aula28.sqlite")
+
     opcao = 0
 
     while opcao != 6:
@@ -123,19 +125,10 @@ def menu_contato():
 
         elif opcao == 6:
             print("Saindo do programa")
+            return
 
         else:
             print("Opção Inválida")
             print("=-=" * 10)
 
-
-######### Principal ##########
-
-conexao = sqlite3.connect("aula28.sqlite")
-
-menu_contato()
-
-
-print("Fim do programa")
-
-conexao.close()
+    conexao.close()
